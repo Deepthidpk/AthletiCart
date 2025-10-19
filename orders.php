@@ -81,7 +81,7 @@ img { max-width:80px; border-radius:6px; }
         <li><a href="userindex.php">Home</a></li>
          <li><a href="products.php">Products</a></li>
         <li><a href="cart.php">Cart</a></li>
-        <li><a href="orders.php">Cart</a></li>
+        <li><a href="orders.php">Orders</a></li>
          <li><a href="logout.php">Logout</a></li>
        
     </ul>
