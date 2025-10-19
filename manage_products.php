@@ -16,20 +16,24 @@ if (!isset($conn) || !($conn instanceof mysqli)) {
     }
 }
 
+
 /* ===========================
    CATEGORY MANAGEMENT
 =========================== */
-if (isset($_POST['add_category'])) {
+if (isset($_POST['add_category']) && isset($_POST['category_name'])) {
+    header('Content-Type: application/json');
     $category_name = trim($_POST['category_name']);
     $response = ['success' => false, 'message' => ''];
+
     if ($category_name !== "") {
         // Prevent duplicate category names
         $stmtCheck = $conn->prepare("SELECT * FROM tbl_category WHERE category_name=?");
         $stmtCheck->bind_param("s", $category_name);
         $stmtCheck->execute();
         $resCheck = $stmtCheck->get_result();
+
         if ($resCheck->num_rows == 0) {
-            $stmt = $conn->prepare("INSERT INTO tbl_category (category_name, status) VALUES (?, 'active')");
+            $stmt = $conn->prepare("INSERT INTO tbl_category (category_name) VALUES (?)");
             $stmt->bind_param("s", $category_name);
             if($stmt->execute()) {
                 $response['success'] = true;
@@ -44,9 +48,11 @@ if (isset($_POST['add_category'])) {
     } else {
         $response['message'] = 'Category name cannot be empty';
     }
+
     echo json_encode($response);
     exit;
 }
+
 
 /* ===========================
    PRODUCT MANAGEMENT CLASS

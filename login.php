@@ -40,7 +40,9 @@ class User {
 }
 
 // Database connection
-$database = new mysqli("localhost", "root", "", "athleticart");
+$db = new Database();
+
+$database = $db->connect();
 $user = new User($database);
 
 $message = "";

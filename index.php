@@ -6,8 +6,8 @@ session_start(); // Start the session
 
 require_once "connect.php";
 // Check login
-if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php");
+if (isset($_SESSION['user_id'])) {
+    header("Location: userindex.php");
     exit();
 }
 // Ensure $conn exists. If connect.php created a different variable (e.g. $database) use it.
@@ -232,7 +232,8 @@ footer {
          <li><a href="products.php">Products</a></li>
         <li><a href="cart.php">Cart</a></li>
         <li><a href="orders.php">Orders</a></li>
-        
+        <li><a href="register.php">Register</a></li>
+        <li><a href="login.php">Login</a></li>
          <li><a href="logout.php">Logout</a></li>
        
     </ul>

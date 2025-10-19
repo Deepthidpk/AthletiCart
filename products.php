@@ -1,6 +1,10 @@
 <?php
 session_start();
 require_once "connect.php"; // Database connection
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit();
+}
 $db = new Database();
 $database = $db->connect();
 // ===============================
